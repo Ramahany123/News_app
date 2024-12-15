@@ -35,8 +35,29 @@ class _TilesListViewBuilderState extends State<TilesListViewBuilder> {
           child: CircularProgressIndicator(),
         ),
       );
-    } else {
+    } else if (articles.isNotEmpty) {
       return TilesListView(articles: articles);
+    } else {
+      return SliverFillRemaining(
+        hasScrollBody: false,
+        child: Center(
+          child: Text(
+            "OOPS There was an ERORR!!!",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 36,
+                fontWeight: FontWeight.bold,
+                color: Colors.redAccent,
+                shadows: [
+                  Shadow(
+                    color: Colors.black.withOpacity(0.3),
+                    offset: const Offset(2, 2),
+                    blurRadius: 4,
+                  )
+                ]),
+          ),
+        ),
+      );
     }
   }
 }
