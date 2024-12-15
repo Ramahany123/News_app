@@ -13,7 +13,8 @@ class NewsTile extends StatelessWidget {
           //to give a border radius without the need for a container
           borderRadius: BorderRadius.circular(8),
           child: Image.network(
-            article.image,
+            article.image ??
+                "https://ehelperteam.com/wp-content/uploads/2019/09/Broken-images.png",
             width: double.infinity,
             height: 200,
             fit: BoxFit.cover,
