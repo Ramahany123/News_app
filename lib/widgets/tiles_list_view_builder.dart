@@ -28,12 +28,15 @@ class _TilesListViewBuilderState extends State<TilesListViewBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? const SliverToBoxAdapter(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          )
-        : TilesListView(articles: articles);
+    if (isLoading) {
+      return const SliverFillRemaining(
+        hasScrollBody: false,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else {
+      return TilesListView(articles: articles);
+    }
   }
 }
