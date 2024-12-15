@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/models/articles_model.dart';
 import 'package:news_app/services/news_services.dart';
+import 'package:news_app/widgets/erorr_message.dart';
 import 'package:news_app/widgets/tiles_list_view.dart';
 
 class TilesListViewBuilder extends StatefulWidget {
@@ -12,52 +13,36 @@ class TilesListViewBuilder extends StatefulWidget {
 }
 
 class _TilesListViewBuilderState extends State<TilesListViewBuilder> {
-  List<ArticlesModel> articles = [];
-  bool isLoading = true;
+  var future;
   @override
   void initState() {
     super.initState();
-    getNews();
-  }
-
-  Future<void> getNews() async {
-    articles = await NewsServices(Dio()).getNews();
-    isLoading = false;
-    setState(() {});
+    future = NewsServices(Dio()).getNews();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      return const SliverFillRemaining(
-        hasScrollBody: false,
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    } else if (articles.isNotEmpty) {
-      return TilesListView(articles: articles);
-    } else {
-      return SliverFillRemaining(
-        hasScrollBody: false,
-        child: Center(
-          child: Text(
-            "OOPS There was an ERORR!!!",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.bold,
-                color: Colors.redAccent,
-                shadows: [
-                  Shadow(
-                    color: Colors.black.withOpacity(0.3),
-                    offset: const Offset(2, 2),
-                    blurRadius: 4,
-                  )
-                ]),
-          ),
-        ),
-      );
-    }
+    return FutureBuilder<List<ArticlesModel>>(
+      future: future,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return TilesListView(articles: snapshot.data!);
+        } else if (snapshot.hasError) {
+          return const SliverFillRemaining(
+            hasScrollBody: false,
+            child: Center(
+              child: ErorrMssg(message: "OOPS There was an ERORR!!!"),
+            ),
+          );
+        } else {
+          return const SliverFillRemaining(
+            hasScrollBody: false,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
+    );
   }
 }
