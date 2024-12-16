@@ -41,7 +41,7 @@ class HomeView extends StatelessWidget {
                   height: 32,
                 ),
               ),
-              TilesListViewBuilder(),
+              TilesListViewBuilder(category: "general"),
             ],
           ),
         ));

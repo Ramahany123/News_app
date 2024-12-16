@@ -7,14 +7,14 @@ class CategoriesListView extends StatelessWidget {
     super.key,
   });
 
-  final List<CardModel> cards = const [
-    CardModel(image: "assets/business.avif", name: "Business"),
-    CardModel(image: "assets/entertaiment.avif", name: "Entertaiment"),
-    CardModel(image: "assets/general.avif", name: "General"),
-    CardModel(image: "assets/health.avif", name: "Health"),
-    CardModel(image: "assets/science.avif", name: "Science"),
-    CardModel(image: "assets/sports.avif", name: "Sports"),
-    CardModel(image: "assets/technology.jpeg", name: "Technology"),
+  final List<CategoryModel> cards = const [
+    CategoryModel(image: "assets/business.avif", name: "Business"),
+    CategoryModel(image: "assets/entertaiment.avif", name: "Entertainment"),
+    CategoryModel(image: "assets/health.avif", name: "Health"),
+    CategoryModel(image: "assets/science.avif", name: "Science"),
+    CategoryModel(image: "assets/sports.avif", name: "Sports"),
+    CategoryModel(image: "assets/technology.jpeg", name: "Technology"),
+    CategoryModel(image: "assets/general.avif", name: "General"),
   ];
 
   @override
@@ -27,7 +27,7 @@ class CategoriesListView extends StatelessWidget {
         itemCount: cards.length,
         itemBuilder: (context, index) {
           return CategoryCard(
-            card: cards[index],
+            category: cards[index],
           );
         },
       ),

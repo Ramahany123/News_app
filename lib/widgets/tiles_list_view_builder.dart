@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/models/articles_model.dart';
 import 'package:news_app/services/news_services.dart';
@@ -6,8 +5,8 @@ import 'package:news_app/widgets/erorr_message.dart';
 import 'package:news_app/widgets/tiles_list_view.dart';
 
 class TilesListViewBuilder extends StatefulWidget {
-  const TilesListViewBuilder({super.key});
-
+  const TilesListViewBuilder({super.key, required this.category});
+  final String category;
   @override
   State<TilesListViewBuilder> createState() => _TilesListViewBuilderState();
 }
@@ -17,7 +16,7 @@ class _TilesListViewBuilderState extends State<TilesListViewBuilder> {
   @override
   void initState() {
     super.initState();
-    future = NewsServices(Dio()).getNews();
+    future = NewsServices(category: widget.category).getNews();
   }
 
   @override
