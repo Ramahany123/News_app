@@ -16,10 +16,12 @@ class NewsServices {
       List<dynamic> articles = jsonData["articles"];
       List<ArticlesModel> articleslist = [];
       for (var article in articles) {
-        articleslist.add(ArticlesModel(
-            title: article["title"],
-            description: article["description"],
-            image: article["image"]));
+        articleslist.add(ArticlesModel.fromJson(article));
+        //instead of using this part we made a factory constructor
+        // ArticlesModel(
+        //     title: article["title"],
+        //     description: article["description"],
+        //     image: article["image"])
       }
       return articleslist;
     } on Exception catch (e) {
