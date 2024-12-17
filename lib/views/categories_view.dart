@@ -7,10 +7,27 @@ class CategoriesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 247, 173, 37),
+        elevation: 8,
+        title: Text(
+          category.toUpperCase(),
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.5,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: CustomScrollView(
         slivers: [
-          TilesListViewBuilder(
-            category: category,
+          SliverPadding(
+            padding: const EdgeInsets.all(22),
+            sliver: TilesListViewBuilder(
+              category: category,
+            ),
           ),
         ],
       ),
