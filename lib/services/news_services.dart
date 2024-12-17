@@ -24,7 +24,7 @@ class NewsServices {
         //     image: article["image"])
       }
       return articleslist;
-    } on Exception catch (e) {
+    } on Exception {
       return [];
     }
   }
